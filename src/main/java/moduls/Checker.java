@@ -19,7 +19,7 @@ public class Checker {
         return false;
     }
 
-    private boolean checkBox(float x, float y, float r) {
+    public boolean checkBox(float x, float y, float r) {
         if (x >= 0 && y >= 0) {
             return x < r / 2 && y < r;
         }
