@@ -17,33 +17,31 @@
                 <form>
                     Выбери X:
                     <label>
-                        <select name="x-param">
-                            <option value="-5">-5</option>
-                            <option value="-4">-4</option>
-                            <option value="-3">-3</option>
-                            <option value="-2">-2</option>
-                            <option value="-1">-1</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </label>
+                        <input id="x-param" name="x-param" type="number" min="-5" max="5"
+                            placeholder="[-5;5]" required>
+                        </label>
                     <br>
                     Введи Y:
-                    <label>
-                        <input id="y-param" name="y-param" type="number" min="-3" max="5"
-                               placeholder="[-3;5]" required>
-                    </label>
+                    <button class="y-param" value="-4">-4</button>
+                    <button class="y-param" value="-3">-3</button>
+                    <button class="y-param" value="-2">-2</button>
+                    <button class="y-param" value="-1">-1</button>
+                    <button class="y-param" value="0">0</button>
+                    <button class="y-param" value="1">1</button>
+                    <button class="y-param" value="2">2</button>
+                    <button class="y-param" value="3">3</button>
+                    <button class="y-param" value="4">4</button>
                     <br>
+
                     Выбери R:
-                    <input type="radio" name="r-param" value="1" checked="checked" required>1
-                    <input type="radio" name="r-param" value="2" required>2
-                    <input type="radio" name="r-param" value="3" required>3
-                    <input type="radio" name="r-param" value="4" required>4
-                    <input type="radio" name="r-param" value="5" required>5
+                    <input type="checkbox" name="r-param" value="1.0" checked="checked" required>1.0
+                    <input type="checkbox" name="r-param" value="1.5" required>1.5
+                    <input type="checkbox" name="r-param" value="2.0" required>2.0
+                    <input type="checkbox" name="r-param" value="2.5" required>2.5
+                    <input type="checkbox" name="r-param" value="3.0" required>3.0
                     <br>
-                    <button id="checkButton" type="button">Отправить</button>
+
+                    <button id="checkButton" type="submit">Отправить</button>
                     <button id="clean">Очистить таблицу</button>
                     <br>
                 </form>

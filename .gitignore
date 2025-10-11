@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 apache-tomcat-11.0.12/
+test.html
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

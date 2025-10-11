@@ -1,16 +1,28 @@
 const table = document.getElementById("checkTable");
 const message = document.getElementById("message");
 $("#message").fadeOut();
+let y;
 
 window.onload = function() {
     load()
+}
+
+const buttons = document.getElementsByClassName("y-param");
+
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].onclick = function(e) {
+        e.preventDefault();
+
+        y = this.value;
+        console.log(y);
+    }
 }
 
 document.getElementById("checkButton").onclick = async function (e) {
     e.preventDefault();
 
     let x = $("select[name='x-param']").val();
-    let y = $("input[name='y-param']").val();
+    y = $("input[name='y-param']").val();
     let r = $("input[type='radio'][name='r-param']:checked").val();
 
     if (!(validateX(x) && validateY(y) && validateR(r))) {
