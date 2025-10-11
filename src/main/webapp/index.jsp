@@ -34,11 +34,11 @@
                     <br>
 
                     Выбери R:
-                    <input type="checkbox" name="r-param" value="1.0" checked="checked" required>1.0
-                    <input type="checkbox" name="r-param" value="1.5" required>1.5
-                    <input type="checkbox" name="r-param" value="2.0" required>2.0
-                    <input type="checkbox" name="r-param" value="2.5" required>2.5
-                    <input type="checkbox" name="r-param" value="3.0" required>3.0
+                    <input class="r-param" type="checkbox" name="r-param" value="1.0" checked="checked" required>1.0
+                    <input class="r-param" type="checkbox" name="r-param" value="1.5" required>1.5
+                    <input class="r-param" type="checkbox" name="r-param" value="2.0" required>2.0
+                    <input class="r-param" type="checkbox" name="r-param" value="2.5" required>2.5
+                    <input class="r-param" type="checkbox" name="r-param" value="3.0" required>3.0
                     <br>
 
                     <button id="checkButton" type="submit">Отправить</button>

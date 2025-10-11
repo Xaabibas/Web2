@@ -1,7 +1,9 @@
 const table = document.getElementById("checkTable");
 const message = document.getElementById("message");
 $("#message").fadeOut();
+let x;
 let y;
+let r;
 
 window.onload = function() {
     load()
@@ -18,61 +20,60 @@ for (let i = 0; i < buttons.length; i++) {
     }
 }
 
-document.getElementById("checkButton").onclick = async function (e) {
+document.getElementById("checkButton").onclick =  function (e) {
     e.preventDefault();
 
-    let x = $("select[name='x-param']").val();
-    y = $("input[name='y-param']").val();
-    let r = $("input[type='radio'][name='r-param']:checked").val();
-
-    if (!(validateX(x) && validateY(y) && validateR(r))) {
+    x = $("input[name='x-param']").val();
+    console.log(x, y, r);
+    if (!(validateX(x) && validateY(y) && validateR())) {
         return;
     }
+    console.log(x, y, r);
 
-    try {
-        let date = new Date();
-        let start = dateToString(date);
-        let data = { x, y, r, start };
-
-        const response = await fetch("/fcgi-bin/server.jar", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        const json = await response.json();
-        if (json.error != null) {
-            changeMessage(json.error);
-            showFadeIn("#message");
-            return;
-        }
-
-        append(x, y, r, json.result, start, json.time);
-        $("#message").fadeOut();
-    } catch(err) {
-        changeMessage("Ошибка: " + err.message);
-        console.log(err.message);
-    }
+//    try {
+//        let date = new Date();
+//        let start = dateToString(date);
+//        let data = { x, y, r, start };
+//
+//        const response = await fetch("/fcgi-bin/server.jar", { // TODO: переделать запрос,
+//            method: "POST",
+//            headers: {
+//                "Accept": "application/json",
+//                "Content-Type": "application/json"
+//            },
+//            body: JSON.stringify(data)
+//        });
+//
+//        const json = await response.json();
+//        if (json.error != null) {
+//            changeMessage(json.error);
+//            showFadeIn("#message");
+//            return;
+//        }
+//
+//        append(x, y, r, json.result, start, json.time);
+//        $("#message").fadeOut();
+//    } catch(err) {
+//        changeMessage("Ошибка: " + err.message);
+//        console.log(err.message);
+//    }
 };
 
-document.getElementById("clean").onclick = async function (e) {
-    e.preventDefault();
-
-    const response = await fetch("/fcgi-bin/server.jar", {
-        method: "PATCH",
-        headers: {
-
-        }
-    });
-
-    while (table.rows.length > 1) {
-        table.deleteRow(1);
-    }
-
-}
+//document.getElementById("clean").onclick = async function (e) {
+//    e.preventDefault();
+//
+//    const response = await fetch("/fcgi-bin/server.jar", { // TODO: передеалть запрос
+//        method: "PATCH",
+//        headers: {
+//
+//        }
+//    });
+//
+//    while (table.rows.length > 1) {
+//        table.deleteRow(1);
+//    }
+//
+//}
 
 function append(x, y, r, result, start, time) {
     let newRow = table.insertRow(1);
@@ -98,8 +99,18 @@ function dateToString(date) {
 }
 
 function validateX(x) {
+    if (x == null || x == "") {
+        changeMessage("Не введено значение поля X");
+        showFadeIn("#message");
+        return false;
+    }
     if (isNaN(x)) {
         changeMessage("Не выбрано значение поля X");
+        showFadeIn("#message");
+        return false;
+    }
+    if (Math.abs(x) > 5) {
+        changeMessage("Значение поля X должно находится в промежутке [-5; 5]");
         showFadeIn("#message");
         return false;
     }
@@ -117,19 +128,30 @@ function validateY(y) {
         showFadeIn("#message");
         return false;
     }
-    if (y < -3 || y > 5) {
-        changeMessage("Значение поля Y должно быть в промежутке [-3; 5]");
-        showFadeIn("#message");
-        return false;
-    }
     return true;
 }
 
-function showFadeIn(field) {
-    $(field).fadeIn();
-}
-
-function validateR(r) {
+function validateR() {
+    allR = document.getElementsByClassName("r-param");
+    checkedR = [];
+    for (let i = 0; i < allR.length; i++) {
+        if (allR[i].checked) {
+            checkedR.push(allR[i]);
+        }
+    }
+    console.log(checkedR)
+    console.log(checkedR.length);
+    if (checkedR.length < 1) {
+        changeMessage("Не выбрано значение поля R");
+        showFadeIn("#message");
+        return false;
+    }
+    if (checkedR.length > 1) {
+        changeMessage("Необходимо выбрать одно значение R");
+        showFadeIn("#message");
+        return false;
+    }
+    r = checkedR[0].value;
     if (isNaN(r)) {
         changeMessage("Не выбрано значение поля R");
         showFadeIn("#message");
@@ -147,18 +169,22 @@ function changeMessage(str) {
     message.textContent = str;
 }
 
+function showFadeIn(field) {
+    $(field).fadeIn();
+}
+
 function load() {
-    fetch('data.csv')
-        .then(response => response.text())
-        .then(csv => {
-            const rows = csv.split("\n");
-            if (rows.length < 2) {
-                return;
-            }
-            rows.slice(1).forEach(row => {
-                const values = row.split(",");
-                append(...values);
-            })
-        })
+//    fetch('data.csv')
+//        .then(response => response.text())
+//        .then(csv => {
+//            const rows = csv.split("\n");
+//            if (rows.length < 2) {
+//                return;
+//            }
+//            rows.slice(1).forEach(row => {
+//                const values = row.split(",");
+//                append(...values);
+//            })
+//        })
 
 }
