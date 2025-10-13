@@ -83,7 +83,7 @@ document.getElementById("clean").onclick = async function (e) {
 async function checkPoint(x, y, r, start) {
     try {
         let data = {x, y, r, start};
-        const response = await fetch( "/Web2-1.0-SNAPSHOT/check", {
+        const response = await fetch( "/Web2-1.0-SNAPSHOT/controller", {
             method: "POST",
             headers: {
                 "Accept": "application/json",

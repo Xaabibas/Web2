@@ -26,9 +26,9 @@ public class AreaCheckServlet extends HttpServlet {
         Container container = readContainer(body);
         logger.info(String.format("%f, %f, %f", container.getX(), container.getY(), container.getR()) + ", " + container.getStart());
 
-        response.setContentType("text/html");
+        response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
-        writer.write("check is running");
+        writer.write("{}");
         writer.close();
     }
 
