@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import moduls.Answer;
 import moduls.Checker;
 import moduls.Container;
 
@@ -21,14 +22,22 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        long start = System.nanoTime();
+
         String body = readBody(request);
         logger.info(body);
         Container container = readContainer(body);
         logger.info(String.format("%f, %f, %f", container.getX(), container.getY(), container.getR()) + ", " + container.getStart());
+        boolean hit = checker.checkBox(container.getX(), container.getY(), container.getR());
+
+        long end = System.nanoTime();
+        Answer answer = new Answer();
+        answer.setHit(hit);
+        answer.setTime((end - start) / 1_000_000);
 
         response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
-        writer.write("{}");
+        writer.write(mapper.writeValueAsString(answer));
         writer.close();
     }
 

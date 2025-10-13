@@ -93,6 +93,8 @@ async function checkPoint(x, y, r, start) {
         });
 
         const json = await response.json();
+
+        console.log(json);
     } catch (err) {
         console.log(err.message);
     }
