@@ -6,7 +6,7 @@ let y;
 let r;
 
 window.onload = function() {
-    load()
+    load();
 }
 
 const buttons = document.getElementsByClassName("y-param");
@@ -29,6 +29,7 @@ document.getElementById("checkButton").onclick =  function (e) {
         return;
     }
     console.log(x, y, r);
+    checkPoint(x, y, r);
 
 //    try {
 //        let date = new Date();
@@ -59,9 +60,9 @@ document.getElementById("checkButton").onclick =  function (e) {
 //    }
 };
 
-//document.getElementById("clean").onclick = async function (e) {
-//    e.preventDefault();
-//
+document.getElementById("clean").onclick = async function (e) {
+    e.preventDefault();
+
 //    const response = await fetch("/fcgi-bin/server.jar", { // TODO: передеалть запрос
 //        method: "PATCH",
 //        headers: {
@@ -72,8 +73,27 @@ document.getElementById("checkButton").onclick =  function (e) {
 //    while (table.rows.length > 1) {
 //        table.deleteRow(1);
 //    }
-//
-//}
+
+}
+
+async function checkPoint(x, y, r) {
+    try {
+        let data = {x, y, r};
+        const response = await fetch( "/Web2-1.0-SNAPSHOT/check", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const json = await response.json();
+    } catch (err) {
+        console.log(err.message);
+    }
+
+}
 
 function append(x, y, r, result, start, time) {
     let newRow = table.insertRow(1);

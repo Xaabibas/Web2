@@ -90,7 +90,9 @@
             </td>
         </tr>
     </table>
+
     <jsp:include page="table.jsp" />
+
     <script src="script.js"></script>
 </body>
 </html>
