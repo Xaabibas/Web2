@@ -1,10 +1,13 @@
 package servlets;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import moduls.Checker;
+import moduls.Point;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,12 +17,14 @@ import java.util.logging.Logger;
 public class AreaCheckServlet extends HttpServlet {
     private final Checker checker = new Checker();
     private final Logger logger = Logger.getLogger(AreaCheckServlet.class.getName());
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String body = readBody(request);
-        logger.info(body);
+        Point point = readPoint(body);
+        logger.info(String.format("%f, %f, %f", point.getX(), point.getY(), point.getR()));
 
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
@@ -35,5 +40,10 @@ public class AreaCheckServlet extends HttpServlet {
             result.append((char) valueOfChar);
         }
         return result.toString();
+    }
+
+    private Point readPoint(String json) throws IOException {
+        Point point = mapper.readValue(json.getBytes(), Point.class);
+        return point;
     }
 }
