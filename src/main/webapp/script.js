@@ -174,17 +174,17 @@ function showFadeIn(field) {
 }
 
 function load() {
-//    fetch('data.csv')
-//        .then(response => response.text())
-//        .then(csv => {
-//            const rows = csv.split("\n");
-//            if (rows.length < 2) {
-//                return;
-//            }
-//            rows.slice(1).forEach(row => {
-//                const values = row.split(",");
-//                append(...values);
-//            })
-//        })
+    fetch('data.csv')
+        .then(response => response.text())
+        .then(csv => {
+            const rows = csv.split("\n");
+            if (rows.length < 2) {
+                return;
+            }
+            rows.slice(1).forEach(row => {
+                const values = row.split(",");
+                append(...values);
+            })
+        })
 
 }
