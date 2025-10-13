@@ -1,13 +1,12 @@
 package servlets;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import moduls.Checker;
-import moduls.Point;
+import moduls.Container;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,8 +22,9 @@ public class AreaCheckServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String body = readBody(request);
-        Point point = readPoint(body);
-        logger.info(String.format("%f, %f, %f", point.getX(), point.getY(), point.getR()));
+        logger.info(body);
+        Container container = readContainer(body);
+        logger.info(String.format("%f, %f, %f", container.getX(), container.getY(), container.getR()) + ", " + container.getStart());
 
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
@@ -42,8 +42,8 @@ public class AreaCheckServlet extends HttpServlet {
         return result.toString();
     }
 
-    private Point readPoint(String json) throws IOException {
-        Point point = mapper.readValue(json.getBytes(), Point.class);
-        return point;
+    private Container readContainer(String json) throws IOException {
+        Container container = mapper.readValue(json.getBytes(), Container.class);
+        return container;
     }
 }

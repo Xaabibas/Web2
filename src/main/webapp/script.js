@@ -1,6 +1,6 @@
 const table = document.getElementById("checkTable");
 const message = document.getElementById("message");
-$("#message").fadeOut();
+showFadeOut("#message")
 let x;
 let y;
 let r;
@@ -24,12 +24,16 @@ document.getElementById("checkButton").onclick =  function (e) {
     e.preventDefault();
 
     x = $("input[name='x-param']").val();
-    console.log(x, y, r);
     if (!(validateX(x) && validateY(y) && validateR())) {
         return;
     }
-    console.log(x, y, r);
-    checkPoint(x, y, r);
+
+    let date = new Date();
+    let start = dateToString(date);
+
+    console.log(x, y, r, start);
+    checkPoint(x, y, r, start);
+    showFadeOut("#message");
 
 //    try {
 //        let date = new Date();
@@ -76,9 +80,9 @@ document.getElementById("clean").onclick = async function (e) {
 
 }
 
-async function checkPoint(x, y, r) {
+async function checkPoint(x, y, r, start) {
     try {
-        let data = {x, y, r};
+        let data = {x, y, r, start};
         const response = await fetch( "/Web2-1.0-SNAPSHOT/check", {
             method: "POST",
             headers: {
@@ -191,6 +195,10 @@ function changeMessage(str) {
 
 function showFadeIn(field) {
     $(field).fadeIn();
+}
+
+function showFadeOut(field) {
+    $(field).fadeOut();
 }
 
 function load() {

@@ -1,17 +1,19 @@
 package moduls;
 
-public class Point {
+public class Container {
     private float x;
     private float y;
     private float r;
+    private String start;
 
-    public Point(){
+    public Container(){
 
     }
-    public Point(float x, float y, float r) {
+    public Container(float x, float y, float r, String start) {
         this.x = x;
         this.y = y;
         this.r = r;
+        this.start = start;
     }
 
     public float getX() {
@@ -36,5 +38,13 @@ public class Point {
 
     public void setR(float r) {
         this.r = r;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
     }
 }
