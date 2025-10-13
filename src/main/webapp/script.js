@@ -20,7 +20,7 @@ for (let i = 0; i < buttons.length; i++) {
     }
 }
 
-document.getElementById("checkButton").onclick =  function (e) {
+document.getElementById("checkButton").onclick = async function (e) {
     e.preventDefault();
 
     x = $("input[name='x-param']").val();
@@ -31,37 +31,16 @@ document.getElementById("checkButton").onclick =  function (e) {
     let date = new Date();
     let start = dateToString(date);
 
-    console.log(x, y, r, start);
-    checkPoint(x, y, r, start);
+    let json = await checkPoint(x, y, r, start);
     showFadeOut("#message");
 
-//    try {
-//        let date = new Date();
-//        let start = dateToString(date);
-//        let data = { x, y, r, start };
-//
-//        const response = await fetch("/fcgi-bin/server.jar", { // TODO: переделать запрос,
-//            method: "POST",
-//            headers: {
-//                "Accept": "application/json",
-//                "Content-Type": "application/json"
-//            },
-//            body: JSON.stringify(data)
-//        });
-//
-//        const json = await response.json();
-//        if (json.error != null) {
-//            changeMessage(json.error);
-//            showFadeIn("#message");
-//            return;
-//        }
-//
-//        append(x, y, r, json.result, start, json.time);
-//        $("#message").fadeOut();
-//    } catch(err) {
-//        changeMessage("Ошибка: " + err.message);
-//        console.log(err.message);
-//    }
+    if (!(json.error == null || json.error == "")) {
+        changeMessage(json.error);
+        showFadeIn("#message");
+        return;
+    }
+
+    append(x, y, r, json.result, start, json.time);
 };
 
 document.getElementById("clean").onclick = async function (e) {
@@ -95,6 +74,8 @@ async function checkPoint(x, y, r, start) {
         const json = await response.json();
 
         console.log(json);
+
+        return json;
     } catch (err) {
         console.log(err.message);
     }

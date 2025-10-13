@@ -21,7 +21,7 @@ public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException { // TODO: проверка корректности данных
         long start = System.nanoTime();
 
         String body = readBody(request);
