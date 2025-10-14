@@ -47,6 +47,11 @@ for (let i = 0; i < buttons.length; i++) {
     buttons[i].onclick = function(e) {
         e.preventDefault();
 
+        for (let j = 0; j < buttons.length; j++) {
+            buttons[j].classList.remove("selected");
+        }
+        this.classList.add("selected");
+
         y = this.value;
         console.log(y);
     }

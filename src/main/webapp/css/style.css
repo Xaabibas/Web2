@@ -65,14 +65,23 @@ th {
     fill: blue;
     fill-opacity: 0.4;
 }
+
 #pointer {
     stroke: red;
     fill: red;
     fill-opacity: 0.8;
 }
 
-.y-param {
+.selected {
+    background-color: mediumblue;
+    color: white;
+    border-color: navy;
+    text-decoration: underline;
+}
 
+.y-param {
+    width: 20pt;
+    height: 20pt;
 }
 
 .r-param {
