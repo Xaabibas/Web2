@@ -91,8 +91,13 @@
                 </div>
             </td>
         </tr>
-        <tr>
+        <tr class="info">
             <td id="message">
+
+            </td>
+        </tr>
+        <tr class"info">
+            <td id="point-result">
 
             </td>
         </tr>

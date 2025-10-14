@@ -23,15 +23,16 @@ svg.onclick = async function (e) {
 
     let json = await checkPoint(correctX, correctY, getR(), start);
 
-    showFadeOut("#message");
+    showFadeOut(messageId);
 
     if (!(json.error == null || json.error == "")) {
         changeMessage(json.error);
-        showFadeIn("#message");
+        showFadeIn(messageId);
         return;
     }
 
-    append(correctX, correctY, getR(), json.result, start, json.time);
+    showResult(json.result, correctX.toFixed(2), correctY.toFixed(2));
+    append(correctX.toFixed(2), correctY.toFixed(2), getR(), json.result, start, json.time);
 }
 
 function hidePointer() {

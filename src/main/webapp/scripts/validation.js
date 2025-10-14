@@ -2,7 +2,8 @@ let x;
 let y;
 let r;
 
-const messageId = "#message"
+const messageId = "#message";
+const pointId = "#point-result"
 const xid = "#select-x";
 const yid = "#select-y";
 const rid = "#select-r";

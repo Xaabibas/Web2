@@ -4,6 +4,7 @@ window.onload = function() {
 
 document.getElementById("checkButton").onclick = async function (e) {
     e.preventDefault();
+    hideResult();
 
     if (!(validateX() && validateY() && validateR())) {
         return;
@@ -21,6 +22,7 @@ document.getElementById("checkButton").onclick = async function (e) {
         return;
     }
 
+    showResult(json.result, getX(), getY());
     append(getX(), getY(), getR(), json.result, start, json.time);
 };
 
