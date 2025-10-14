@@ -27,7 +27,7 @@ public class Checker {
             return y >= x / 2 - r / 2;
         }
         if (x < 0 && y < 0) {
-            return x*x + y*y <= r*r;
+            return x*x + y*y <= r*r / 4;
         }
         return false;
     }
