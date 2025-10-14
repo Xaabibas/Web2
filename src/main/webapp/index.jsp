@@ -15,13 +15,17 @@
         <tr>
             <td class="left">
                 <form>
-                    Выбери X:
+                    <div id="select-x">
+                        Выбери X:
+                    </div>
                     <label>
                         <input id="x-param" name="x-param" type="number" min="-5" max="5"
                             placeholder="[-5;5]" required>
                         </label>
                     <br>
-                    Введи Y:
+                    <div id="select-y">
+                        Введи Y:
+                    </div>
                     <button class="y-param" value="-4">-4</button>
                     <button class="y-param" value="-3">-3</button>
                     <button class="y-param" value="-2">-2</button>
@@ -33,7 +37,9 @@
                     <button class="y-param" value="4">4</button>
                     <br>
 
-                    Выбери R:
+                    <div id="select-r">
+                        Выбери R:
+                    </div>
                     <input class="r-param" type="checkbox" name="r-param" value="1.0" checked="checked" required>1.0
                     <input class="r-param" type="checkbox" name="r-param" value="1.5" required>1.5
                     <input class="r-param" type="checkbox" name="r-param" value="2.0" required>2.0
