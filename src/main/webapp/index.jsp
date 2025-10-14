@@ -80,6 +80,7 @@
                         <rect class="figure" x="150" y="30" width="60" height="120"></rect>
 
                         <path class="figure" d="M 150 150 L 150 210 C116.863 210, 90 183.137, 90 150 Z"></path>
+                        <circle id="pointer" r="3" cx="150" cy="150" visibility="hidden"></circle>
                     </svg>
                 </div>
             </td>

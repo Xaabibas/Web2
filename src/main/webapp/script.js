@@ -1,5 +1,6 @@
 const table = document.getElementById("checkTable");
 const message = document.getElementById("message");
+const pointer = document.getElementById("pointer");
 showFadeOut("#message")
 let x;
 let y;
@@ -68,7 +69,7 @@ async function checkPoint(x, y, r, start) {
         });
 
         const json = await response.json();
-
+        showPointer(x, y, r);
         console.log(json);
 
         return json;
@@ -190,6 +191,16 @@ function showFadeIn(field) {
 
 function showFadeOut(field) {
     $(field).fadeOut();
+}
+
+function hidePointer() {
+    pointer.style.visibility = "hidden";
+}
+
+function showPointer(x, y, r) {
+    pointer.style.visibility = "visible";
+    pointer.setAttribute("cx", 150 + 120 * x / r);
+    pointer.setAttribute("cy", 150 - 120 * y / r);
 }
 
 function load() {
