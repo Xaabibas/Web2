@@ -81,9 +81,11 @@ th {
 
 .y-param {
     width: 20pt;
-    height: 20pt;
+    height: 16pt;
 }
 
 .r-param {
-
+    accent-color: mediumorchid;
+    width: 10pt;
+    height: 10pt;
 }
