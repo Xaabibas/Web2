@@ -46,25 +46,21 @@ document.getElementById("checkButton").onclick = async function (e) {
 document.getElementById("clean").onclick = async function (e) {
     e.preventDefault();
 
-//    const response = await fetch("/fcgi-bin/server.jar", { // TODO: передеалть запрос
-//        method: "PATCH",
-//        headers: {
-//
-//        }
-//    });
-//
-//    while (table.rows.length > 1) {
-//        table.deleteRow(1);
-//    }
+    clear();
+
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
 
 }
 
 async function checkPoint(x, y, r, start) {
     try {
         let data = {x, y, r, start};
-        const response = await fetch( "/Web2-1.0-SNAPSHOT/controller", {
+        const response = await fetch("/Web2-1.0-SNAPSHOT/controller", {
             method: "POST",
             headers: {
+                "Action": "check",
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
@@ -79,7 +75,19 @@ async function checkPoint(x, y, r, start) {
     } catch (err) {
         console.log(err.message);
     }
+}
 
+async function clear() {
+    try {
+        const response = await fetch("/Web2-1.0-SNAPSHOT/controller", {
+            method: "POST",
+            headers: {
+                "Action": "clear"
+            }
+        });
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 function append(x, y, r, result, start, time) {

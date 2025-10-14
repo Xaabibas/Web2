@@ -10,7 +10,7 @@
             <th scope="col">R</th>
             <th scope="col">Попадание</th>
             <th scope="col">Время отправки</th>
-            <th scope="col">Время работы, мс</th>
+            <th scope="col">Время работы, мкс</th>
         </tr>
     </table>
 </body>

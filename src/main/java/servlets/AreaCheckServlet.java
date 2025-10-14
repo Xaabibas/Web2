@@ -33,7 +33,7 @@ public class AreaCheckServlet extends HttpServlet {
         long end = System.nanoTime();
         Answer answer = new Answer();
         answer.setHit(hit);
-        answer.setTime((end - start) / 1_000_000);
+        answer.setTime((end - start) / 1_000);
 
         response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
