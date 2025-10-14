@@ -93,7 +93,10 @@
     </table>
 
     <jsp:include page="table.jsp" />
-
-    <script src="script.js"></script>
+    <script src="scripts/message.js"></script>
+    <script src="scripts/validation.js"></script>
+    <script src="scripts/table.js"></script>
+    <script src="scripts/graph.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
