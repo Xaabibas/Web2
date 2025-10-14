@@ -1,6 +1,7 @@
 package servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import exp.ValidationException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,19 +22,10 @@ public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException { // TODO: проверка корректности данных
-        long start = System.nanoTime();
-
+            throws ServletException, IOException {
         String body = readBody(request);
-        logger.info(body);
         Container container = readContainer(body);
-        logger.info(String.format("%f, %f, %f", container.getX(), container.getY(), container.getR()) + ", " + container.getStart());
-        boolean hit = checker.checkBox(container.getX(), container.getY(), container.getR());
-
-        long end = System.nanoTime();
-        Answer answer = new Answer();
-        answer.setHit(hit);
-        answer.setTime((end - start) / 1_000);
+        Answer answer = formAnswer(container);
 
         response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
@@ -54,5 +46,19 @@ public class AreaCheckServlet extends HttpServlet {
     private Container readContainer(String json) throws IOException {
         Container container = mapper.readValue(json.getBytes(), Container.class);
         return container;
+    }
+
+    private Answer formAnswer(Container container) {
+        long start = System.nanoTime();
+        Answer answer = new Answer();
+        try {
+            boolean hit = checker.checkBox(container.getX(), container.getY(), container.getR());
+            answer.setHit(hit);
+        } catch (ValidationException e) {
+            answer.setError(e.getMessage());
+        }
+        long end = System.nanoTime();
+        answer.setTime((end - start) / 1_000_000);
+        return answer;
     }
 }

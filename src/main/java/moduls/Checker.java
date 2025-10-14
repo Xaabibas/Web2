@@ -1,5 +1,7 @@
 package moduls;
 
+import exp.ValidationException;
+
 import java.util.HashMap;
 
 public class Checker {
@@ -12,11 +14,10 @@ public class Checker {
 
             return checkBox(x, y, r);
         } catch (IllegalArgumentException ignored) {
-            // TODO: обработка исключения
+            throw new ValidationException("Некорректный формат данных");
         } catch (NullPointerException ignored) {
-            // TODO: обработка исключения (оно вообще возникает?)
+            throw new ValidationException("Что-то пошло не так"); // Оно вообще возникает?
         }
-        return false;
     }
 
     public boolean checkBox(float x, float y, float r) {
