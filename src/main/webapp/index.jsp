@@ -48,7 +48,7 @@
             </td>
             <td class="right">
                 <div class="graph">
-                    <svg xmlns="http://www.w3.org/2000/svg"
+                    <svg id="graph" xmlns="http://www.w3.org/2000/svg"
                          width="300"
                          height="300">
                         <line class="axis" x1="0" y1="150" x2="300" y2="150"></line>
