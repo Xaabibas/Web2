@@ -1,6 +1,5 @@
 package servlets;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import exp.ValidationException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -11,9 +10,7 @@ import moduls.Checker;
 import moduls.Container;
 import moduls.Rename;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Logger;
 
 public class AreaCheckServlet extends HttpServlet {

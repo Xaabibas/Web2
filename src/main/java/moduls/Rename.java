@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Logger;
 
-public class Rename {
+public class Rename { // TODO: rename
     private final ObjectMapper mapper = new ObjectMapper();
     private final Logger logger = Logger.getLogger(Rename.class.getName());
 
