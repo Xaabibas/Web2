@@ -21,7 +21,7 @@ svg.onclick = async function (e) {
 
     console.log(correctX, correctY);
 
-    let json = await checkPoint(correctX, correctY, getR(), start);
+    let json = await checkPoint(correctX.toFixed(2), correctY.toFixed(2), getR(), start);
 
     showFadeOut(messageId);
 

@@ -5,9 +5,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import moduls.Answer;
-import moduls.Container;
-import moduls.Rename;
+import modules.Answer;
+import modules.Container;
+import modules.Rename;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -20,11 +20,11 @@ public class ControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            Container container = rename.readContainer(request);
-            request.setAttribute("container", container);
             String action = request.getHeader("Action");
 
             if (action.equals("check")) {
+                Container container = rename.readContainer(request);
+                request.setAttribute("container", container);
                 getServletContext().getRequestDispatcher("/check").forward(request, response);
             } else if (action.equals("clear")) {
                 logger.info("clear");

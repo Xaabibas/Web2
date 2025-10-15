@@ -1,7 +1,3 @@
-window.onload = function() {
-    load();
-}
-
 document.getElementById("checkButton").onclick = async function (e) {
     e.preventDefault();
     hideResult();

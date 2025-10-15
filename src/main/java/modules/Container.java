@@ -1,4 +1,4 @@
-package moduls;
+package modules;
 
 public class Container {
     private Float x;

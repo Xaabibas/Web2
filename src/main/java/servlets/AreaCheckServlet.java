@@ -5,10 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import moduls.Answer;
-import moduls.Checker;
-import moduls.Container;
-import moduls.Rename;
+import modules.*;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -25,6 +22,7 @@ public class AreaCheckServlet extends HttpServlet {
         Answer answer = formAnswer(container);
 
         rename.writeAnswer(response, answer);
+        RequestKeeper.add(new Row(container, answer));
     }
 
     private Answer formAnswer(Container container) {
@@ -38,7 +36,7 @@ public class AreaCheckServlet extends HttpServlet {
             answer.setError(e.getMessage());
         }
         long end = System.nanoTime();
-        answer.setTime((end - start) / 1_000_000);
+        answer.setTime((end - start) / 1_000);
         return answer;
     }
 }

@@ -24,7 +24,7 @@ async function clear() {
 }
 
 function append(x, y, r, result, start, time) {
-    let newRow = table.insertRow(1);
+    let newRow = table.insertRow(-1);
     const rowX = newRow.insertCell(0);
     const rowY = newRow.insertCell(1);
     const rowR = newRow.insertCell(2);
@@ -40,20 +40,4 @@ function append(x, y, r, result, start, time) {
     rowWorkTime.textContent = time;
 }
 
-function load() {
-    fetch('data.csv')
-        .then(response => response.text())
-        .then(csv => {
-            const rows = csv.split("\n");
-            if (rows.length < 2) {
-                return;
-            }
-            rows.slice(1).forEach(row => {
-                const values = row.split(",");
-                append(...values);
-            })
-        })
-}
-
 window.append = append;
-window.load = load;
