@@ -1,9 +1,9 @@
 package moduls;
 
 public class Container {
-    private float x;
-    private float y;
-    private float r;
+    private Float x;
+    private Float y;
+    private Float r;
     private String start;
 
     public Container(){
