@@ -4,6 +4,7 @@
 <%@ page import="modules.Answer" %>
 <%@ page import="modules.Container" %>
 <%@ page import="java.util.concurrent.CopyOnWriteArrayList" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 
 <html>
 <head>
@@ -20,7 +21,12 @@
         </tr>
 
         <%
-        for (Row row : RequestKeeper.getList()) { %>
+        if (request.getSession().getAttribute("list") == null) {
+            request.getSession().setAttribute("list", new RequestKeeper());
+        }
+        RequestKeeper list = (RequestKeeper) request.getSession().getAttribute("list");
+
+        for (Row row : list.getList()) { %>
             <tr>
                 <td>
                     <%= row.getContainer().getX() %>

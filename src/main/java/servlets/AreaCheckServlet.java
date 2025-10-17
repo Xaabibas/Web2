@@ -22,7 +22,8 @@ public class AreaCheckServlet extends HttpServlet {
         Answer answer = formAnswer(container);
 
         rename.writeAnswer(response, answer);
-        RequestKeeper.add(new Row(container, answer));
+        RequestKeeper list = (RequestKeeper) request.getSession().getAttribute("list");
+        list.add(new Row(container, answer));
     }
 
     private Answer formAnswer(Container container) {

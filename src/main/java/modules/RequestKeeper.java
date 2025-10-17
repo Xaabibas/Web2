@@ -3,17 +3,16 @@ package modules;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class RequestKeeper {
-    private static final CopyOnWriteArrayList<Row> list = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<Row> list = new CopyOnWriteArrayList<>();
 
-    public static void add(Row row) {
+    public void add(Row row) {
         list.add(row);
     }
-    public static void clear() {
-
+    public void clear() {
         list.clear();
     }
 
-    public static CopyOnWriteArrayList<Row> getList() {
+    public CopyOnWriteArrayList<Row> getList() {
         return list;
     }
 }
