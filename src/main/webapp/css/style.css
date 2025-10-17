@@ -66,6 +66,18 @@ th {
     fill-opacity: 0.4;
 }
 
+.hit {
+    stroke: green;
+    fill: green;
+    fill-opacity: 0.8;
+}
+
+.miss {
+    stroke: red;
+    fill: red;
+    fill-opacity: 0.8;
+}
+
 #pointer {
     stroke: red;
     fill: red;

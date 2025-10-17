@@ -4,6 +4,7 @@ document.getElementById("clean").onclick = async function (e) {
     e.preventDefault();
 
     clear();
+    removePoints();
 
     while (table.rows.length > 1) {
         table.deleteRow(1);

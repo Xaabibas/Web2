@@ -36,8 +36,7 @@ async function checkPoint(x, y, r, start) {
         });
 
         const json = await response.json();
-        showPointer(x, y, r);
-        console.log(json);
+        drawPoint(x, y, r, json.result);
 
         return json;
     } catch (err) {
