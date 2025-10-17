@@ -46,12 +46,14 @@
     RequestKeeper list = (RequestKeeper) request.getSession().getAttribute("list");
 
     for (Row row : list.getList()) { %>
-
-        <circle class=<%= row.getAnswer().isHit() ? "hit" : "miss"%>
-            r="3"
-            cx=<%= 150 + 120 * row.getContainer().getX() / row.getContainer().getR() %>
-            cy=<%= 150 - 120 * row.getContainer().getY() / row.getContainer().getR() %>
-        ></circle>
-
-    <%}%>
+      <circle
+          class="<%= row.getAnswer().isHit() ? "hit" : "miss" %>"
+          r="3"
+          data-x="<%= row.getContainer().getX() %>"
+          data-y="<%= row.getContainer().getY() %>"
+          data-r="<%= row.getContainer().getR() %>"
+          cx="<%= 150 + 120 * row.getContainer().getX() / row.getContainer().getR() %>"
+          cy="<%= 150 - 120 * row.getContainer().getY() / row.getContainer().getR() %>"
+      ></circle>
+    <% } %>
 </svg>

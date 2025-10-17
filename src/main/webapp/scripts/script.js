@@ -8,18 +8,21 @@ document.getElementById("checkButton").onclick = async function (e) {
 
     let date = new Date();
     let start = dateToString(date);
+    getRs().forEach(async (r) =>
+    {
+        let json = await checkPoint(getX(), getY(), r, start);
+        showFadeOut("#message");
 
-    let json = await checkPoint(getX(), getY(), getR(), start);
-    showFadeOut("#message");
+        if (!(json.error == null || json.error == "")) {
+            changeMessage(json.error);
+            showFadeIn("#message");
+            return;
+        }
 
-    if (!(json.error == null || json.error == "")) {
-        changeMessage(json.error);
-        showFadeIn("#message");
-        return;
+        showResult(json.result, getX(), getY());
+        append(getX(), getY(), r, json.result, start, json.time);
     }
-
-    showResult(json.result, getX(), getY());
-    append(getX(), getY(), getR(), json.result, start, json.time);
+    );
 };
 
 async function checkPoint(x, y, r, start) {
@@ -42,6 +45,7 @@ async function checkPoint(x, y, r, start) {
     } catch (err) {
         console.log(err.message);
     }
+    redraw();
 }
 
 function dateToString(date) {

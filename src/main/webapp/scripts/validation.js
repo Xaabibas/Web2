@@ -1,6 +1,6 @@
 let x;
 let y;
-let r;
+let rs = [1.0];
 
 const messageId = "#message";
 const pointId = "#point-result"
@@ -72,12 +72,34 @@ function getY() {
     return y;
 }
 
+const allR = document.getElementsByClassName("r-param");
+for (let i = 0; i < allR.length; i++) {
+    allR[i].onchange = function() {
+        handler(this);
+    };
+}
+
+function handler(checkbox) {
+    // Пересобираем массив rs заново
+    rs = Array.from(allR)
+        .filter(r => r.checked)
+        .map(r => parseFloat(r.value));
+
+    if (rs.length === 0) return;
+
+    const newR = Math.max(...rs);
+    if (newR !== getCurrentR()) {
+        setCurrentR(newR);
+        redraw();
+    }
+}
+
+
 function validateR() {
-    const allR = document.getElementsByClassName("r-param");
     const checkedR = [];
     for (let i = 0; i < allR.length; i++) {
         if (allR[i].checked) {
-            checkedR.push(allR[i]);
+            checkedR.push(allR[i].value);
         }
     }
     console.log(checkedR)
@@ -88,30 +110,16 @@ function validateR() {
         blink(rid);
         return false;
     }
-    if (checkedR.length > 1) {
-        changeMessage("Необходимо выбрать одно значение R");
-        showFadeIn(messageId);
-        blink(rid);
-        return false;
-    }
-    r = checkedR[0].value;
-    if (isNaN(r)) {
-        changeMessage("Не выбрано значение поля R");
-        showFadeIn(messageId);
-        blink(rid);
-        return false;
-    }
-    if (r < 0) {
-        changeMessage("Радиус не может быть отрицательным");
-        showFadeIn(messageId);
-        blink(rid);
-        return false;
-    }
+    rs = checkedR;
     return true;
 }
 
-function getR() {
-    return r;
+function getRs() {
+    return rs;
+}
+
+function getMaxR() {
+    return rs[rs.length - 1];
 }
 
 window.validateX = validateX;
@@ -119,4 +127,5 @@ window.validateY = validateY;
 window.validateR = validateR;
 window.getX = getX;
 window.getY = getY;
-window.getR = getR;
+window.getR = getRs;
+window.getMaxR = getMaxR;
