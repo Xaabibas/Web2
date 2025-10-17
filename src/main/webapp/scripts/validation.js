@@ -80,7 +80,6 @@ for (let i = 0; i < allR.length; i++) {
 }
 
 function handler(checkbox) {
-    // Пересобираем массив rs заново
     rs = Array.from(allR)
         .filter(r => r.checked)
         .map(r => parseFloat(r.value));

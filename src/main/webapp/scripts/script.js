@@ -1,3 +1,7 @@
+window.onload = function() {
+    redraw();
+}
+
 document.getElementById("checkButton").onclick = async function (e) {
     e.preventDefault();
     hideResult();
